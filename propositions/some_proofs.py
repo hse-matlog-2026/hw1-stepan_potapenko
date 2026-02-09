@@ -102,6 +102,7 @@ def prove_hypothetical_syllogism() -> Proof:
         Proof.Line(pq_pr, MP, [3, 4]),
         Proof.Line(p_r, MP, [0, 5])
     ]
+
     return Proof(statement, rules, lines)
 
 def prove_I2() -> Proof:
