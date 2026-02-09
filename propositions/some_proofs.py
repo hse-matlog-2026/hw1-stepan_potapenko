@@ -84,6 +84,25 @@ def prove_hypothetical_syllogism() -> Proof:
         `~propositions.axiomatic_systems.D`.
     """
     # Task 5.5
+    statement = HS
+    rules = {MP, I0, I1, D}
+    p_q = Formula.parse('(p->q)')
+    q_r = Formula.parse('(q->r)')
+    p_r = Formula.parse('(p->r)')
+    i1_spec = Formula.parse('((q->r)->(p->(q->r)))')
+    p_qr = Formula.parse('(p->(q->r))')
+    d_spec = Formula.parse('((p->(q->r))->((p->q)->(p->r)))')
+    pq_pr = Formula.parse('((p->q)->(p->r))')
+    lines = [
+        Proof.Line(p_q),
+        Proof.Line(q_r),
+        Proof.Line(i1_spec, I1, []),
+        Proof.Line(p_qr, MP, [1, 2]),
+        Proof.Line(d_spec, D, []),
+        Proof.Line(pq_pr, MP, [3, 4]),
+        Proof.Line(p_r, MP, [0, 5])
+    ]
+    return Proof(statement, rules, lines)
 
 def prove_I2() -> Proof:
     """Proves `~propositions.axiomatic_systems.I2` via
